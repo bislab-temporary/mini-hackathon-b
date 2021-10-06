@@ -1,0 +1,12 @@
+{
+	"name": "app",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/app",
+	"extensions": [
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"formulahendry.auto-rename-tag"
+	],
+	"remoteUser": "node"
+}
