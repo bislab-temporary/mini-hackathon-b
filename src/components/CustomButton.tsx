@@ -11,7 +11,7 @@ const CustomButton = (props: Props) => {
   const { isDone } = props;
 
   return isDone ? (
-    <Editable color="gray.300" as="del" {...props} /> // ここで color と as を指定しちゃう
+    <Editable as="del" {...props} /> // ここで color と as を指定しちゃう
   ) : (
     <Editable {...props} />
   );
