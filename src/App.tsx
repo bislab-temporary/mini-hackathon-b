@@ -1,11 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 
 import InputBar from './components/InputBar';
-import TodoItems from './components/TodoItems';
+import TodoLists from './components/TodoLists';
 
-const App = () => {
-  const [todoItems, setTodoItems] = useState<string[]>([]);
-  const [todoStatus, setTodoStatus] = useState<boolean[]>([]);
+const App = (): JSX.Element => {
+  const [todoItems, setTodoItems] = useState<string[]>(['Todo1', 'Todo2', 'Todo3']);
+  const [todoStatus, setTodoStatus] = useState<boolean[]>([false, false, false]);
+  const [doingItems, setDoingItems] = useState<string[]>(['Doing1', 'Doing2', 'Doing3']);
+  const [doingStatus, setDoingStatus] = useState<boolean[]>([false, false, false]);
+  const [doneItems, setDoneItems] = useState<string[]>(['Done1', 'Done2', 'Done3']);
+  const [doneStatus, setDoneStatus] = useState<boolean[]>([false, false, false]);
 
   return (
     <>
@@ -15,7 +20,17 @@ const App = () => {
         setTodoItems={setTodoItems}
         setTodoStatus={setTodoStatus}
       />
-      <TodoItems todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
+      <TodoLists
+        todoItems={todoItems}
+        todoStatus={todoStatus}
+        setTodoStatus={setTodoStatus}
+        doingItems={doingItems}
+        doingStatus={doingStatus}
+        setDoingStatus={setDoingStatus}
+        doneItems={doneItems}
+        doneStatus={doneStatus}
+        setDoneStatus={setDoneStatus}
+      />
     </>
   );
 };
