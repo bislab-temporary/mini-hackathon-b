@@ -13,10 +13,18 @@ import {
   EditablePreview,
   useEditableControls,
 } from '@chakra-ui/react';
-import React, { useState, ChangeEvent, Dispatch, SetStateAction } from 'react';
+import React, {
+  useState,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  MouseEventHandler,
+  MouseEvent,
+} from 'react';
 
 type Props = {
   todoItems: string[];
+  setTodoItems: Dispatch<SetStateAction<string[]>>;
   todoStatus: boolean[];
   setTodoStatus: Dispatch<SetStateAction<boolean[]>>;
 };
@@ -27,6 +35,13 @@ const TodoList = (props: Props) => {
     const elementNumber = +event.target.value;
     newTodoStatus[elementNumber] = !newTodoStatus[elementNumber];
     props.setTodoStatus(newTodoStatus);
+  };
+
+  const handleDeleteTodoItem = (index: number) => {
+    console.log(index);
+    const newTodoItems = [...props.todoItems];
+    newTodoItems.splice(index, 1);
+    props.setTodoItems(newTodoItems);
   };
 
   const EditableControls = () => {
@@ -60,7 +75,14 @@ const TodoList = (props: Props) => {
               <EditableInput />
               <EditableControls />
             </Editable>
-            <Box bg="blue.100">削除</Box>
+            <IconButton
+              colorScheme="red"
+              size="xs"
+              aria-label="Delete"
+              icon={<CloseIcon />}
+              value={index}
+              onClick={() => handleDeleteTodoItem(index)}
+            />
           </HStack>
         </Box>
       ))}
