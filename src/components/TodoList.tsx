@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useState, ChangeEvent, Dispatch, SetStateAction } from 'react';
 
-import CustomButton from './CustomButton';
+import CustomDisplayTodoItem from './CustomDisplayTodoItem';
 
 type Props = {
   todoItems: string[];
@@ -25,8 +25,6 @@ type Props = {
 };
 
 const TodoList = (props: Props) => {
-  const [editTodoStatus, setEditTodoStatus] = useState<boolean>(false);
-
   const handleTodoStatus = (event: ChangeEvent<HTMLInputElement>) => {
     const newTodoStatus = [...props.todoStatus];
     const elementNumber = +event.target.value;
@@ -56,20 +54,15 @@ const TodoList = (props: Props) => {
         <Box key={todoItem} w="500px" h="60px" p={5} shadow="md" borderWidth="1px">
           <HStack w="100%" h="100%" justifyContent="space-between">
             <Checkbox value={index} onChange={handleTodoStatus} />
-            {editTodoStatus === false ? (
-              <CustomButton isDone={props.todoStatus[index]}>
-                {/* <Button variant="ghost" onDoubleClick={handleOnDoubleClick}>
-                  {todoItem}
-                </Button> */}
-                <Editable defaultValue={todoItem} isPreviewFocusable={false}>
-                  <EditablePreview />
-                  <EditableInput />
-                  <EditableControls />
-                </Editable>
-              </CustomButton>
-            ) : (
-              <Input></Input>
-            )}
+            <Editable defaultValue={todoItem} isPreviewFocusable={false}>
+              {props.todoStatus[index] === false ? (
+                <EditablePreview />
+              ) : (
+                <EditablePreview as="del" />
+              )}
+              <EditableInput />
+              <EditableControls />
+            </Editable>
             <Box bg="blue.100">削除</Box>
           </HStack>
         </Box>
