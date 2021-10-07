@@ -27,7 +27,7 @@ const TodoLists = ({
   setDoneStatus,
 }: Props) => {
   return (
-    <HStack spacing="24px" overflowX="scroll">
+    <HStack spacing="24px" overflowX="scroll" align="start">
       <TodoItems todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
       <TodoItems todoItems={doingItems} todoStatus={doingStatus} setTodoStatus={setDoingStatus} />
       <TodoItems todoItems={doneItems} todoStatus={doneStatus} setTodoStatus={setDoneStatus} />
