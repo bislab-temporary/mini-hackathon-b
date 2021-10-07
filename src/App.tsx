@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 
 import InputBar from './components/InputBar';
@@ -11,7 +10,7 @@ const App = (): JSX.Element => {
     { no: 2, status: false, item: 'Todo2' },
     { no: 3, status: false, item: 'Todo3' },
   ]);
-  const [doingList, setdoingList] = useState<TodoType[]>([
+  const [doingList, setDoingList] = useState<TodoType[]>([
     { no: 4, status: false, item: 'Doing1' },
     { no: 5, status: false, item: 'Doing2' },
     { no: 6, status: false, item: 'Doing3' },
