@@ -1,36 +1,36 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 
 import InputBar from './components/InputBar';
 import TodoLists from './components/TodoLists';
+import { TodoType } from './types/TodoType';
 
 const App = (): JSX.Element => {
-  const [todoItems, setTodoItems] = useState<string[]>(['Todo1', 'Todo2', 'Todo3']);
-  const [todoStatus, setTodoStatus] = useState<boolean[]>([false, false, false]);
-  const [doingItems, setDoingItems] = useState<string[]>(['Doing1', 'Doing2', 'Doing3']);
-  const [doingStatus, setDoingStatus] = useState<boolean[]>([false, false, false]);
-  const [doneItems, setDoneItems] = useState<string[]>(['Done1', 'Done2', 'Done3']);
-  const [doneStatus, setDoneStatus] = useState<boolean[]>([false, false, false]);
+  const [todoList, setTodoList] = useState<TodoType[]>([
+    { no: 1, status: false, item: 'Todo1' },
+    { no: 2, status: false, item: 'Todo2' },
+    { no: 3, status: false, item: 'Todo3' },
+  ]);
+  const [doingList, setDoingList] = useState<TodoType[]>([
+    { no: 4, status: false, item: 'Doing1' },
+    { no: 5, status: false, item: 'Doing2' },
+    { no: 6, status: false, item: 'Doing3' },
+  ]);
+  const [doneList, setDoneList] = useState<TodoType[]>([
+    { no: 7, status: false, item: 'Done1' },
+    { no: 8, status: false, item: 'Done2' },
+    { no: 9, status: false, item: 'Done3' },
+  ]);
 
   return (
     <>
-      <InputBar
-        todoItems={todoItems}
-        todoStatus={todoStatus}
-        setTodoItems={setTodoItems}
-        setTodoStatus={setTodoStatus}
-      />
+      <InputBar todoList={todoList} setTodoList={setTodoList} />
       <TodoLists
-        todoItems={todoItems}
-        setTodoItems={setTodoItems}
-        todoStatus={todoStatus}
-        setTodoStatus={setTodoStatus}
-        doingItems={doingItems}
-        doingStatus={doingStatus}
-        setDoingStatus={setDoingStatus}
-        doneItems={doneItems}
-        doneStatus={doneStatus}
-        setDoneStatus={setDoneStatus}
+        todoList={todoList}
+        setTodoList={setTodoList}
+        doingList={doingList}
+        setDoingList={setDoingList}
+        doneList={doneList}
+        setDoneList={setDoneList}
       />
     </>
   );

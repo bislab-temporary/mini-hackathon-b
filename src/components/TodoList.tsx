@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
 import {
   VStack,
@@ -13,35 +12,37 @@ import {
   EditablePreview,
   useEditableControls,
 } from '@chakra-ui/react';
-import React, {
-  useState,
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  MouseEventHandler,
-  MouseEvent,
-} from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
+import { Draggable, DraggableProvided, Droppable, DroppableProvided } from 'react-beautiful-dnd';
+
+import { TodoType } from '@/types/TodoType';
 
 type Props = {
-  todoItems: string[];
-  setTodoItems: Dispatch<SetStateAction<string[]>>;
-  todoStatus: boolean[];
-  setTodoStatus: Dispatch<SetStateAction<boolean[]>>;
+  listName: string;
+  todoList: TodoType[];
+  setTodoList: Dispatch<SetStateAction<TodoType[]>>;
 };
 
-const TodoList = (props: Props) => {
-  const handleTodoStatus = (event: ChangeEvent<HTMLInputElement>) => {
-    const newTodoStatus = [...props.todoStatus];
-    const elementNumber = +event.target.value;
-    newTodoStatus[elementNumber] = !newTodoStatus[elementNumber];
-    props.setTodoStatus(newTodoStatus);
+const TodoList = ({ listName, todoList, setTodoList }: Props) => {
+  const handleTodoStatus = (no: number) => {
+    const newTodoList: TodoType[] = [];
+    todoList.forEach((todoItem: TodoType) => {
+      if (todoItem.no === no) {
+        todoItem.status = !todoItem.status;
+      }
+      newTodoList.push(todoItem);
+    });
+    setTodoList(newTodoList);
   };
 
-  const handleDeleteTodoItem = (index: number) => {
-    console.log(index);
-    const newTodoItems = [...props.todoItems];
-    newTodoItems.splice(index, 1);
-    props.setTodoItems(newTodoItems);
+  const handleDeleteTodoItem = (no: number) => {
+    const newTodoList: TodoType[] = [];
+    todoList.forEach((todoItem: TodoType) => {
+      if (todoItem.no !== no) {
+        newTodoList.push(todoItem);
+      }
+    });
+    setTodoList(newTodoList);
   };
 
   const EditableControls = () => {
@@ -61,32 +62,50 @@ const TodoList = (props: Props) => {
   };
 
   return (
-    <VStack>
-      {props.todoItems.map((todoItem, index) => (
-        <Box key={todoItem} w="500px" h="60px" p={5} shadow="md" borderWidth="1px">
-          <HStack w="100%" h="100%" justifyContent="space-between">
-            <Checkbox value={index} onChange={handleTodoStatus} />
-            <Editable defaultValue={todoItem} isPreviewFocusable={false}>
-              {props.todoStatus[index] === false ? (
-                <EditablePreview />
-              ) : (
-                <EditablePreview as="del" />
+    <Droppable droppableId={listName}>
+      {(provided: DroppableProvided) => (
+        <VStack {...provided.droppableProps} ref={provided.innerRef}>
+          {todoList.map((todoItem: TodoType, index: number) => (
+            <Draggable key={todoItem.no} draggableId={String(todoItem.no)} index={index}>
+              {(provided: DraggableProvided) => (
+                <Box
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                  ref={provided.innerRef}
+                  key={todoItem.no}
+                  w="500px"
+                  h="60px"
+                  p={5}
+                  shadow="md"
+                  borderWidth="1px"
+                >
+                  <HStack w="100%" h="100%" justifyContent="space-between">
+                    <Checkbox value={index} onChange={() => handleTodoStatus(todoItem.no)} />
+                    <Editable defaultValue={todoItem.item} isPreviewFocusable={false}>
+                      {todoItem.status === false ? (
+                        <EditablePreview />
+                      ) : (
+                        <EditablePreview as="del" />
+                      )}
+                      <EditableInput />
+                      <EditableControls />
+                    </Editable>
+                    <IconButton
+                      colorScheme="red"
+                      size="xs"
+                      aria-label="Delete"
+                      icon={<CloseIcon />}
+                      value={index}
+                      onClick={() => handleDeleteTodoItem(todoItem.no)}
+                    />
+                  </HStack>
+                </Box>
               )}
-              <EditableInput />
-              <EditableControls />
-            </Editable>
-            <IconButton
-              colorScheme="red"
-              size="xs"
-              aria-label="Delete"
-              icon={<CloseIcon />}
-              value={index}
-              onClick={() => handleDeleteTodoItem(index)}
-            />
-          </HStack>
-        </Box>
-      ))}
-    </VStack>
+            </Draggable>
+          ))}
+        </VStack>
+      )}
+    </Droppable>
   );
 };
 

@@ -1,21 +1,29 @@
 import { Input, VStack } from '@chakra-ui/react';
 import React, { useState, Dispatch, SetStateAction } from 'react';
 
+import { TodoType } from '@/types/TodoType';
+
 type Props = {
-  todoItems: string[];
-  todoStatus: boolean[];
-  setTodoItems: Dispatch<SetStateAction<string[]>>;
-  setTodoStatus: Dispatch<SetStateAction<boolean[]>>;
+  todoList: TodoType[];
+  setTodoList: Dispatch<SetStateAction<TodoType[]>>;
 };
 
-const InputBar = (props: Props) => {
+const InputBar = ({ todoList, setTodoList }: Props) => {
   const [inputText, setInputText] = useState<string>('');
 
+  const getMax = (todoList: TodoType[]): number => {
+    let _max = -1;
+    todoList.forEach((todoItem) => {
+      _max = Math.max(_max, todoItem.no);
+    });
+    return _max;
+  };
+
   const handleSubmit = () => {
-    const newTodoItems = [...props.todoItems, inputText];
-    props.setTodoItems(newTodoItems);
-    const newTodoStatus = [...props.todoStatus, false];
-    props.setTodoStatus(newTodoStatus);
+    const no = getMax(todoList) + 1;
+    const newTodoItem = { no: no, status: false, item: inputText };
+    const newTodoItems = [...todoList, newTodoItem];
+    setTodoList(newTodoItems);
   };
 
   return (
