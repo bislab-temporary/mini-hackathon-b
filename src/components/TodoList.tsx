@@ -4,14 +4,15 @@ import { Draggable, DraggableProvided, Droppable, DroppableProvided } from 'reac
 
 import CustomButton from './CustomButton';
 
+import { TodoType } from '@/types/TodoType';
+
 type Props = {
-  statusName: string;
-  todoItems: string[];
-  todoStatus: boolean[];
-  setTodoStatus: Dispatch<SetStateAction<boolean[]>>;
+  listName: string;
+  todoList: TodoType[];
+  setTodoList: Dispatch<SetStateAction<TodoType[]>>;
 };
 
-const TodoList = (props: Props) => {
+const TodoList = ({ listName, todoList, setTodoList }: Props) => {
   const handleTodoStatus = (event: ChangeEvent<HTMLInputElement>) => {
     const newTodoStatus = [...props.todoStatus];
     const elementNumber = +event.target.value;
