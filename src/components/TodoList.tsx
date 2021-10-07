@@ -8,15 +8,12 @@ import {
   ButtonGroup,
   IconButton,
   Flex,
-  Input,
   Editable,
   EditableInput,
   EditablePreview,
   useEditableControls,
 } from '@chakra-ui/react';
 import React, { useState, ChangeEvent, Dispatch, SetStateAction } from 'react';
-
-import CustomDisplayTodoItem from './CustomDisplayTodoItem';
 
 type Props = {
   todoItems: string[];
