@@ -1,3 +1,4 @@
+import { HStack } from '@chakra-ui/layout';
 import React, { useState } from 'react';
 
 import InputBar from './components/InputBar';
@@ -15,7 +16,11 @@ const App = (): JSX.Element => {
         setTodoItems={setTodoItems}
         setTodoStatus={setTodoStatus}
       />
-      <TodoItems todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
+      <HStack spacing="24px" overflowX="scroll">
+        <TodoItems todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
+        <TodoItems todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
+        <TodoItems todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
+      </HStack>
     </>
   );
 };
