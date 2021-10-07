@@ -8,10 +8,10 @@ type Props = {
   setTodoStatus: Dispatch<SetStateAction<boolean[]>>;
 };
 
-const InputBar = (props: Props): JSX.Element => {
+const InputBar = (props: Props) => {
   const [inputText, setInputText] = useState<string>('');
 
-  const handleSubmit = (): void => {
+  const handleSubmit = () => {
     const newTodoItems = [...props.todoItems, inputText];
     props.setTodoItems(newTodoItems);
     const newTodoStatus = [...props.todoStatus, false];
