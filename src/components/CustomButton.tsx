@@ -7,7 +7,7 @@ type CustomProps = {
 type Props = EditableProps & CustomProps;
 
 // props として受け取った isDone によって表示を変えるコンポーネント
-const CustomEditable = (props: Props) => {
+const CustomButton = (props: Props) => {
   const { isDone } = props;
 
   return isDone ? (
@@ -17,4 +17,4 @@ const CustomEditable = (props: Props) => {
   );
 };
 
-export default CustomEditable;
+export default CustomButton;
