@@ -22,6 +22,7 @@ const App = (): JSX.Element => {
       />
       <TodoLists
         todoItems={todoItems}
+        setTodoItems={setTodoItems}
         todoStatus={todoStatus}
         setTodoStatus={setTodoStatus}
         doingItems={doingItems}

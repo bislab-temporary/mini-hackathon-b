@@ -5,6 +5,7 @@ import TodoList from './TodoList';
 
 type Props = {
   todoItems: string[];
+  setTodoItems: Dispatch<SetStateAction<string[]>>;
   todoStatus: boolean[];
   setTodoStatus: Dispatch<SetStateAction<boolean[]>>;
   doingItems: string[];
@@ -17,6 +18,7 @@ type Props = {
 
 const TodoLists = ({
   todoItems,
+  setTodoItems,
   todoStatus,
   setTodoStatus,
   doingItems,
@@ -28,9 +30,24 @@ const TodoLists = ({
 }: Props) => {
   return (
     <HStack spacing="24px" overflowX="scroll" align="start">
-      <TodoList todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
-      <TodoList todoItems={doingItems} todoStatus={doingStatus} setTodoStatus={setDoingStatus} />
-      <TodoList todoItems={doneItems} todoStatus={doneStatus} setTodoStatus={setDoneStatus} />
+      <TodoList
+        todoItems={todoItems}
+        setTodoItems={setTodoItems}
+        todoStatus={todoStatus}
+        setTodoStatus={setTodoStatus}
+      />
+      <TodoList
+        todoItems={doingItems}
+        setTodoItems={setTodoItems}
+        todoStatus={doingStatus}
+        setTodoStatus={setDoingStatus}
+      />
+      <TodoList
+        todoItems={doneItems}
+        setTodoItems={setTodoItems}
+        todoStatus={doneStatus}
+        setTodoStatus={setDoneStatus}
+      />
     </HStack>
   );
 };
