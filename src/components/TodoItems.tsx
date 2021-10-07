@@ -10,8 +10,8 @@ type Props = {
 const TodoItems = (props: Props) => {
   const handleTodoStatus = (event: ChangeEvent<HTMLInputElement>) => {
     const newTodoStatus = [...props.todoStatus];
-    const elemetnNumber = +event.target.value;
-    newTodoStatus[elemetnNumber] = !newTodoStatus[elemetnNumber];
+    const elementNumber = +event.target.value;
+    newTodoStatus[elementNumber] = !newTodoStatus[elementNumber];
     props.setTodoStatus(newTodoStatus);
   };
 
