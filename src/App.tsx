@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { HStack } from '@chakra-ui/layout';
 import React, { useState } from 'react';
 
 import InputBar from './components/InputBar';
-import TodoItems from './components/TodoItems';
+import TodoLists from './components/TodoLists';
 
 const App = (): JSX.Element => {
   const [todoItems, setTodoItems] = useState<string[]>([]);
@@ -21,11 +20,17 @@ const App = (): JSX.Element => {
         setTodoItems={setTodoItems}
         setTodoStatus={setTodoStatus}
       />
-      <HStack spacing="24px" overflowX="scroll">
-        <TodoItems todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
-        <TodoItems todoItems={doingItems} todoStatus={doingStatus} setTodoStatus={setDoingStatus} />
-        <TodoItems todoItems={doneItems} todoStatus={doneStatus} setTodoStatus={setDoneStatus} />
-      </HStack>
+      <TodoLists
+        todoItems={todoItems}
+        todoStatus={todoStatus}
+        setTodoStatus={setTodoStatus}
+        doingItems={doingItems}
+        doingStatus={doingStatus}
+        setDoingStatus={setDoingStatus}
+        doneItems={doneItems}
+        doneStatus={doneStatus}
+        setDoneStatus={setDoneStatus}
+      />
     </>
   );
 };
