@@ -83,9 +83,9 @@ const TodoLists = ({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <HStack spacing="24px" overflowX="scroll" align="start">
-        <TodoList statusName="Todo" todoList={todoList} setTodoList={setTodoList} />
-        <TodoList statusName="Doing" doingList={doingList} setDoingList={setDoingList} />
-        <TodoList statusName="Done" doneList={doneList} setDoneList={setDoingList} />
+        <TodoList listName="Todo" todoList={todoList} setTodoList={setTodoList} />
+        <TodoList listName="Doing" doingList={doingList} setDoingList={setDoingList} />
+        <TodoList listName="Done" doneList={doneList} setDoneList={setDoingList} />
       </HStack>
     </DragDropContext>
   );
