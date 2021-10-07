@@ -9,7 +9,7 @@ type Props = {
   setTodoStatus: Dispatch<SetStateAction<boolean[]>>;
 };
 
-const TodoItems = (props: Props) => {
+const TodoList = (props: Props) => {
   const handleTodoStatus = (event: ChangeEvent<HTMLInputElement>) => {
     const newTodoStatus = [...props.todoStatus];
     const elementNumber = +event.target.value;
@@ -31,4 +31,4 @@ const TodoItems = (props: Props) => {
   );
 };
 
-export default TodoItems;
+export default TodoList;

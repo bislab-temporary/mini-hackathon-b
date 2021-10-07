@@ -1,7 +1,7 @@
 import { HStack } from '@chakra-ui/layout';
 import { Dispatch, SetStateAction } from 'react';
 
-import TodoItems from './TodoItems';
+import TodoList from './TodoList';
 
 type Props = {
   todoItems: string[];
@@ -28,9 +28,9 @@ const TodoLists = ({
 }: Props) => {
   return (
     <HStack spacing="24px" overflowX="scroll" align="start">
-      <TodoItems todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
-      <TodoItems todoItems={doingItems} todoStatus={doingStatus} setTodoStatus={setDoingStatus} />
-      <TodoItems todoItems={doneItems} todoStatus={doneStatus} setTodoStatus={setDoneStatus} />
+      <TodoList todoItems={todoItems} todoStatus={todoStatus} setTodoStatus={setTodoStatus} />
+      <TodoList todoItems={doingItems} todoStatus={doingStatus} setTodoStatus={setDoingStatus} />
+      <TodoList todoItems={doneItems} todoStatus={doneStatus} setTodoStatus={setDoneStatus} />
     </HStack>
   );
 };
