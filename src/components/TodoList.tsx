@@ -1,7 +1,19 @@
-import { VStack, HStack, Checkbox, Box } from '@chakra-ui/react';
-import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
-
-import CustomButton from './CustomButton';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
+import {
+  VStack,
+  HStack,
+  Checkbox,
+  Box,
+  ButtonGroup,
+  IconButton,
+  Flex,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  useEditableControls,
+} from '@chakra-ui/react';
+import React, { useState, ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 type Props = {
   todoItems: string[];
@@ -17,13 +29,38 @@ const TodoList = (props: Props) => {
     props.setTodoStatus(newTodoStatus);
   };
 
+  const EditableControls = () => {
+    const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } =
+      useEditableControls();
+
+    return isEditing ? (
+      <ButtonGroup justifyContent="center" size="xs">
+        <IconButton aria-label="Check" icon={<CheckIcon />} {...getSubmitButtonProps()} />
+        <IconButton aria-label="Close" icon={<CloseIcon />} {...getCancelButtonProps()} />
+      </ButtonGroup>
+    ) : (
+      <Flex justifyContent="center">
+        <IconButton aria-label="Edit" size="xs" icon={<EditIcon />} {...getEditButtonProps()} />
+      </Flex>
+    );
+  };
+
   return (
     <VStack>
       {props.todoItems.map((todoItem, index) => (
-        <Box key={todoItem} w="500px" h="50px" p={5} shadow="md" borderWidth="1px">
-          <HStack>
+        <Box key={todoItem} w="500px" h="60px" p={5} shadow="md" borderWidth="1px">
+          <HStack w="100%" h="100%" justifyContent="space-between">
             <Checkbox value={index} onChange={handleTodoStatus} />
-            <CustomButton isDone={props.todoStatus[index]}>{todoItem}</CustomButton>
+            <Editable defaultValue={todoItem} isPreviewFocusable={false}>
+              {props.todoStatus[index] === false ? (
+                <EditablePreview />
+              ) : (
+                <EditablePreview as="del" />
+              )}
+              <EditableInput />
+              <EditableControls />
+            </Editable>
+            <Box bg="blue.100">削除</Box>
           </HStack>
         </Box>
       ))}
