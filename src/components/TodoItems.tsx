@@ -1,5 +1,5 @@
 import { VStack, Checkbox } from '@chakra-ui/react';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, ChangeEvent } from 'react';
 
 type Props = {
   todoItems: string[];
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const TodoItems = (props: Props) => {
-  const handleTodoStatus = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTodoStatus = (event: ChangeEvent<HTMLInputElement>) => {
     const newTodoStatus = [...props.todoStatus];
     const elemetnNumber = +event.target.value;
     newTodoStatus[elemetnNumber] = !newTodoStatus[elemetnNumber];
