@@ -5,10 +5,10 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 ReactDOM.render(
-  <ChakraProvider>
-    <React.StrictMode>
+  <React.StrictMode>
+    <ChakraProvider>
       <App />
-    </React.StrictMode>
-  </ChakraProvider>,
+    </ChakraProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
