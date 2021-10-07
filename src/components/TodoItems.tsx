@@ -7,7 +7,7 @@ type Props = {
   setTodoStatus: Dispatch<SetStateAction<boolean[]>>;
 };
 
-const TodoItems = (props: Props): JSX.Element => {
+const TodoItems = (props: Props) => {
   const handleTodoStatus = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTodoStatus = [...props.todoStatus];
     const elemetnNumber = +event.target.value;

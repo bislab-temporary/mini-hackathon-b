@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import InputBar from './components/InputBar';
 import TodoItems from './components/TodoItems';
 
-const App = (): JSX.Element => {
+const App = () => {
   const [todoItems, setTodoItems] = useState<string[]>([]);
   const [todoStatus, setTodoStatus] = useState<boolean[]>([]);
 
